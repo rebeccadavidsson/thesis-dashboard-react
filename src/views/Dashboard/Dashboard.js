@@ -11,7 +11,6 @@ import Footer from 'components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import flowchart from "assets/img/choice_flowchart.png";
 
-
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {

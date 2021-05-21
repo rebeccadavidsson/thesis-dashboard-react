@@ -22,14 +22,14 @@ let ps;
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-        return (
-          <Route
+      return (
+        <Route
           exact
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+          path={prop.layout + prop.path}
+          component={prop.component}
+          key={key}
+        />
+      );
     })}
     <Redirect from="/admin" to="/admin/dashboard" />
   </Switch>
@@ -43,8 +43,8 @@ export default function Admin({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [image, setImage] = React.useState(bgImage);
-  const [color, setColor] = React.useState("blue");
+  const image = bgImage;
+  const color = "blue";
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {

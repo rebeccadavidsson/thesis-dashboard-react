@@ -145,40 +145,40 @@ const AlgorithmLSTM = () => {
                     <div class="CodeMirror cm-s-jupyter">
                         <div class="highlight hl-ipython3">
                             <pre><span></span><span class="c1"># Select NPI</span>
-            <span class="n">NPI</span> <span class="o">=</span> <span class="s2">&quot;Gatherings_restrictions&quot;</span>
-            <span class="n">LSTM_predictions</span><span class="p">,</span> <span class="n">feature_data</span><span class="p">,</span> <span class="n">SIR_data</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">SIR_predictions</span><span class="p">)):</span>
-                
-                <span class="c1"># Compute Gradient instead of using the direct predictions </span>
-                <span class="c1"># for scaling/normalization purposes</span>
-                <span class="n">gradient</span> <span class="o">=</span> <span class="n">get_gradient</span><span class="p">(</span><span class="n">SIR_predictions</span><span class="p">[</span><span class="n">day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">SIR_predictions</span><span class="p">[</span><span class="n">day</span><span class="p">])</span>
-                <span class="n">SIR_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
-                    
-                <span class="c1"># Compute trend of NPI</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">NPI_data</span><span class="p">[</span><span class="n">NPI</span><span class="p">])</span>
-                <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">NPI_data</span><span class="p">[</span><span class="n">NPI</span><span class="p">])),</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                
-                <span class="c1"># Compute new weight, where weight is between 0 and 1,</span>
-                <span class="c1"># if 0, then influence of the NPI predictions is none, </span>
-                <span class="c1"># if 1, then influence of the LSTM model predictions is none.</span>
-                <span class="n">weight</span> <span class="o">=</span> <span class="n">compute_weight</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">days_delay</span><span class="p">)</span>
-                <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
-                
-                <span class="c1"># Here, the weight of the NPI (z * weight) at timestep i</span>
-                <span class="c1"># is determined by the delay period (the period between</span>
-                <span class="c1"># implementing an NPI and the effect on the number of cases).</span>
-                <span class="n">result</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">weight</span>
-                <span class="n">feature_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">NPI</span> <span class="o">=</span> <span class="s2">&quot;Gatherings_restrictions&quot;</span>
+<span class="n">LSTM_predictions</span><span class="p">,</span> <span class="n">feature_data</span><span class="p">,</span> <span class="n">SIR_data</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">SIR_predictions</span><span class="p">)):</span>
+    
+    <span class="c1"># Compute Gradient instead of using the direct predictions </span>
+    <span class="c1"># for scaling/normalization purposes</span>
+    <span class="n">gradient</span> <span class="o">=</span> <span class="n">get_gradient</span><span class="p">(</span><span class="n">SIR_predictions</span><span class="p">[</span><span class="n">day</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">SIR_predictions</span><span class="p">[</span><span class="n">day</span><span class="p">])</span>
+    <span class="n">SIR_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gradient</span><span class="p">)</span>
+        
+    <span class="c1"># Compute trend of NPI</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">NPI_data</span><span class="p">[</span><span class="n">NPI</span><span class="p">])</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">NPI_data</span><span class="p">[</span><span class="n">NPI</span><span class="p">])),</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Compute new weight, where weight is between 0 and 1,</span>
+    <span class="c1"># if 0, then influence of the NPI predictions is none, </span>
+    <span class="c1"># if 1, then influence of the LSTM model predictions is none.</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">compute_weight</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">days_delay</span><span class="p">)</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+    
+    <span class="c1"># Here, the weight of the NPI (z * weight) at timestep i</span>
+    <span class="c1"># is determined by the delay period (the period between</span>
+    <span class="c1"># implementing an NPI and the effect on the number of cases).</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="n">weight</span>
+    <span class="n">feature_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-            <span class="c1"># Multivariate LSTM model with SIR based NPI predictions as </span>
-            <span class="c1"># input feature, along with the number of (previous) </span>
-            <span class="c1"># confirmed cases (df) and SIR predictions.</span>
-            <span class="n">model</span> <span class="o">=</span> <span class="n">LSTM</span><span class="p">(</span><span class="n">SIR_data</span><span class="o">=</span><span class="n">SIR_data</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">input_data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
-                        <span class="n">COUNTRY</span><span class="p">,</span> <span class="n">FUTURE_DAYS</span><span class="p">,</span>
-                        <span class="n">TARGET</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-            <span class="n">LSTM_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_days</span><span class="o">=</span><span class="n">FUTURE_DAYS</span><span class="p">)</span>
-            <span class="n">plotweights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="c1"># Multivariate LSTM model with SIR based NPI predictions as </span>
+<span class="c1"># input feature, along with the number of (previous) </span>
+<span class="c1"># confirmed cases (df) and SIR predictions.</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LSTM</span><span class="p">(</span><span class="n">SIR_data</span><span class="o">=</span><span class="n">SIR_data</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="n">feature_data</span><span class="p">,</span> <span class="n">input_data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+            <span class="n">COUNTRY</span><span class="p">,</span> <span class="n">FUTURE_DAYS</span><span class="p">,</span>
+            <span class="n">TARGET</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">LSTM_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_days</span><span class="o">=</span><span class="n">FUTURE_DAYS</span><span class="p">)</span>
+<span class="n">plotweights</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
             </pre>
                         </div>
                     </div>
