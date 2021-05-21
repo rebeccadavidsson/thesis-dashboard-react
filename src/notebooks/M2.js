@@ -103,7 +103,7 @@ const AlgorithmSIR = () => {
 
 <p>
 \\begin{eqnarray}
-\\frac{dI}{dT} &amp; = &amp; \\frac{\\beta(t) }{N} \\ S(t) \\ I(t)  - (\\gamma + \\alpha)  \ I(t)  - \\mathbf{[NPI(t) \ I]} 
+\\frac{dI}{dT} &amp; = &amp; \\frac{\\beta(t) }{N} \\ S(t) \\ I(t)  - (\\gamma + \\alpha)  \\ I(t)  - \\mathbf{[NPI(t) \\ I]} 
 \\end{eqnarray}
 </p>
 <p>

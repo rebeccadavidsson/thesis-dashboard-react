@@ -7,8 +7,8 @@ const PolicyMeasures = () => {
 
 
 
-    const elem = parse(
-        `
+   const elem = parse(
+      `
         <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
       <div class="jp-Cell-inputWrapper">
          <div class="jp-InputPrompt jp-InputArea-prompt"></div>
@@ -572,7 +572,7 @@ const PolicyMeasures = () => {
       <div class="jp-Cell-inputWrapper">
          <div class="jp-InputPrompt jp-InputArea-prompt"></div>
          <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-            <h3 id="$Rt$:-Reprodcution-number-$\mathrm{[-]}$">$Rt$: Reprodcution number $\mathrm{[-]}$<a class="anchor-link" href="#$Rt$:-Reprodcution-number-$\mathrm{[-]}$">&#182;</a></h3>
+            <h3 id="$Rt$:-Reprodcution-number-$\\mathrm{[-]}$">$Rt$: Reprodcution number $\\mathrm{[-]}$<a class="anchor-link" href="#$Rt$:-Reprodcution-number-$\\mathrm{[-]}$">&#182;</a></h3>
          </div>
       </div>
       <div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -605,7 +605,7 @@ const PolicyMeasures = () => {
       <div class="jp-Cell-inputWrapper">
          <div class="jp-InputPrompt jp-InputArea-prompt"></div>
          <div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-            <h3 id="$\rho$:-Effective-contact-rate-$\mathrm{[-]}$">$\rho$: Effective contact rate $\mathrm{[-]}$<a class="anchor-link" href="#$\rho$:-Effective-contact-rate-$\mathrm{[-]}$">&#182;</a></h3>
+            <h3 id="$\\rho$:-Effective-contact-rate-$\\mathrm{[-]}$">$\\rho$: Effective contact rate $\\mathrm{[-]}$<a class="anchor-link" href="#$\\rho$:-Effective-contact-rate-$\\mathrm{[-]}$">&#182;</a></h3>
          </div>
       </div>
       <div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -2015,7 +2015,7 @@ const PolicyMeasures = () => {
 <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="s1">&#39;C</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">cycle</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="o">*</span><span class="n">ncol</span><span class="p">)))</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span><span class="n">ncol</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">ncol</span><span class="o">*</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">nrow</span><span class="o">*</span><span class="mi">4</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Correlation between stringency index and ODE parameters with n days delay for each country. </span><span class="se">\</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Correlation between stringency index and ODE parameters with n days delay for each country. </span><span class="se">\\</span>
 <span class="s2">The grey span indicates a window where effects on parameters are expected.&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span> <span class="n">axs</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
@@ -2074,7 +2074,7 @@ const PolicyMeasures = () => {
 <span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="s1">&#39;C</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">cycle</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="o">*</span><span class="n">ncol</span><span class="p">)))</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span><span class="n">ncol</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">ncol</span><span class="o">*</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">nrow</span><span class="o">*</span><span class="mi">4</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Correlation between stringency index and ODE parameters with n days delay for each country. </span><span class="se">\</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Correlation between stringency index and ODE parameters with n days delay for each country. </span><span class="se">\\</span>
 <span class="s2">The grey span indicates a window where effects on parameters are expected.&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">df</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 
@@ -3241,10 +3241,10 @@ const PolicyMeasures = () => {
       
 
 `
-    )
-    return (
-        <>{elem}</>
-    )
+   )
+   return (
+      <>{elem}</>
+   )
 }
 
 export default PolicyMeasures
