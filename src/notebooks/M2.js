@@ -6,7 +6,6 @@ import parse from 'html-react-parser'
 const AlgorithmSIR = () => {
 
 
-
     const elem = parse(
         `
         <div class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">

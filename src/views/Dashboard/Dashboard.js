@@ -13,6 +13,13 @@ import flowchart from "assets/img/choice_flowchart.png";
 import MapChart from '../../components/WorldMap/Map';
 import DateSlider from '../../components/DateSlider/DateSlider';
 import ReactTooltip from "react-tooltip";
+import InfoIcon from '@material-ui/icons/Info';
+import CustomizedTooltip from '../../components/ToolTip/ToolTip';
+
+import FunctionsIcon from '@material-ui/icons/Functions';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import Timeline from '@material-ui/icons/Timeline';
+import BubbleChart from '@material-ui/icons/BubbleChart';
 
 
 var getDaysArray = function (start, end) {
@@ -22,7 +29,7 @@ var getDaysArray = function (start, end) {
   return arr;
 };
 
-const dateRange = getDaysArray(new Date("2020-02-10"), new Date("2021-05-19"));
+const dateRange = getDaysArray(new Date("2020-02-10"), new Date("2021-05-20"));
 
 const dates = [];
 dateRange.forEach((d) => {
@@ -74,22 +81,50 @@ export default function Dashboard() {
       <GridContainer className="gridLinks">
         <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
           <CardHeader color="primary">
-            <Link to="algorithm_LSTM"> <h4 className={classes.cardTitleWhite} >Algorithm for M1 - LSTM based model</h4> </Link>
+            <Link to="algorithm_LSTM">
+              <div className="gridLink">
+                <FunctionsIcon />
+                <h4 className={classes.cardTitleWhite}>
+                  Algorithm for M1 - LSTM based model
+              </h4>
+              </div>
+            </Link>
           </CardHeader>
         </GridItem>
         <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
           <CardHeader color="info">
-            <Link to="algorithm_SIR"> <h4 className={classes.cardTitleWhite} >Algorithm for M2 - SIR based model</h4> </Link>
+            <Link onClick={() => window.location.href = "/algorithm_SIR"} >
+              <div className="gridLink">
+                <InsertChartIcon />
+                <h4 className={classes.cardTitleWhite}>
+                  Algorithm for M2 - SIR based model
+              </h4>
+              </div>
+            </Link>
           </CardHeader>
         </GridItem>
         <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
           <CardHeader color="rose">
-            <Link to="UQ"> <h4 className={classes.cardTitleWhite} >Uncertainty Quantification</h4> </Link>
+            <Link to="UQ">
+              <div className="gridLink">
+                <Timeline />
+                <h4 className={classes.cardTitleWhite}>
+                  Uncertainty Quantification
+              </h4>
+              </div>
+            </Link>
           </CardHeader>
         </GridItem>
         <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
           <CardHeader color="warning">
-            <Link to="PolicyMeasures"> <h4 className={classes.cardTitleWhite} >Analysis of policy measure strength</h4> </Link>
+            <Link to="PolicyMeasures">
+              <div className="gridLink">
+                <BubbleChart />
+                <h4 className={classes.cardTitleWhite}>
+                  Analysis of policy measure strength
+              </h4>
+              </div>
+            </Link>
           </CardHeader>
         </GridItem>
       </GridContainer>
@@ -101,13 +136,18 @@ export default function Dashboard() {
         <GridItem xs={12} sm={12} md={12} alignItems="stretch">
           <Card>
             <CardHeader color="warning" className="bodyDark">
-              <h4 className={classes.cardTitleWhite}>Stringency Index</h4>
+              <h4 className={classes.cardTitleWhite}>Stringency of government responses to Covid-19</h4>
             </CardHeader>
             <CardBody>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
-                  <h4 style={{ margin: 0 }}>{`Stringency Index for all countries`}</h4>
-                  <h3 style={{ margin: 0 }}>{value !== undefined ? dates[value] : '2021-05-19'}</h3>
+                  <h4 style={{ margin: 0, display: "flex", alignItems: "end" }}>
+                    {`Stringency Index for all countries`}
+                    <CustomizedTooltip>
+                      <span style={{ marginLeft: '5px' }}><InfoIcon /></span>
+                    </CustomizedTooltip>
+                  </h4>
+                  <h2 style={{ margin: 0 }}>{value !== undefined ? dates[value] : '2021-05-19'}</h2>
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                   <DateSlider value={value} setValue={setValue} dates={dates} />

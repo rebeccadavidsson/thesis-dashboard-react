@@ -46,6 +46,10 @@ export default function Sidebar(props) {
         });
         return (
           <NavLink
+            onClick={() => {
+              prop.path === "/algorithm_SIR" ? window.location.href = "/algorithm_SIR" : undefined
+            }
+            }
             to={prop.layout + prop.path}
             className={activePro + classes.item}
             activeClassName="active"

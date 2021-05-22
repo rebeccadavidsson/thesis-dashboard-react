@@ -17,7 +17,7 @@ const DateSlider = ({ value, setValue, dates }) => {
                 defaultValue={dates.length - 10}
                 aria-labelledby="discrete-slider-text"
                 min={0}
-                max={dates.length}
+                max={dates.length - 1}
             />
 
         </div>

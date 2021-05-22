@@ -41,7 +41,8 @@ const ColorScaleWrapper = ({ colors, domain }) => {
                 display: "grid",
                 gridTemplateColumns: "repeat(6, auto)",
                 marginLeft: '5px',
-                width: "116%"
+                width: "116%",
+                marginTop: '10px'
             }}>
                 {xValues.map((value) =>
                     <span className="error-label" key={value}>{value}</span>
