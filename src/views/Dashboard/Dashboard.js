@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -10,12 +10,33 @@ import styles from "assets/jss/thesisproject/views/dashboardStyle.js";
 import Footer from 'components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import flowchart from "assets/img/choice_flowchart.png";
+import MapChart from '../../components/WorldMap/Map';
+import DateSlider from '../../components/DateSlider/DateSlider';
+import ReactTooltip from "react-tooltip";
+
+
+var getDaysArray = function (start, end) {
+  for (var arr = [], dt = new Date(start); dt <= end; dt.setDate(dt.getDate() + 1)) {
+    arr.push(new Date(dt));
+  }
+  return arr;
+};
+
+const dateRange = getDaysArray(new Date("2020-02-10"), new Date("2021-05-19"));
+
+const dates = [];
+dateRange.forEach((d) => {
+  dates.push(d.toISOString().split('T')[0])
+});
 
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
 
   const classes = useStyles();
+  const [content, setContent] = useState("");
+  const [value, setValue] = useState(undefined);
+
   return (
     <div>
       <GridContainer>
@@ -72,7 +93,33 @@ export default function Dashboard() {
           </CardHeader>
         </GridItem>
       </GridContainer>
+
+
+
       <GridContainer>
+
+        <GridItem xs={12} sm={12} md={12} alignItems="stretch">
+          <Card>
+            <CardHeader color="warning" className="bodyDark">
+              <h4 className={classes.cardTitleWhite}>Stringency Index</h4>
+            </CardHeader>
+            <CardBody>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <h4 style={{ margin: 0 }}>{`Stringency Index for all countries`}</h4>
+                  <h3 style={{ margin: 0 }}>{value !== undefined ? dates[value] : '2021-05-19'}</h3>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <DateSlider value={value} setValue={setValue} dates={dates} />
+                </GridItem>
+              </GridContainer>
+              <ReactTooltip>{content}</ReactTooltip>
+              <MapChart setContent={setContent} ToolTip={ReactTooltip} value={value !== undefined ? value : 474} />
+
+            </CardBody>
+          </Card>
+        </GridItem>
+
         <GridItem xs={12} sm={12} md={6} alignItems="stretch" >
           <Card>
             <CardBody>
@@ -103,7 +150,9 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
+
       </GridContainer>
+
       <Footer />
     </div >
   );

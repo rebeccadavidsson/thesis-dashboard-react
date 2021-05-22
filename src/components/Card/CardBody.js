@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 
 export default function CardBody(props) {
   const classes = useStyles();
-  const { className, children, plain, profile, ...rest } = props;
+  const { className, children, plain, profile, style, ...rest } = props;
   const cardBodyClasses = classNames({
     [classes.cardBody]: true,
     [classes.cardBodyPlain]: plain,
@@ -23,7 +23,7 @@ export default function CardBody(props) {
     height: "-webkit-fill-available",
   });
   return (
-    <div className={cardBodyClasses} {...rest}>
+    <div className={cardBodyClasses} {...rest} >
       {children}
     </div>
   );

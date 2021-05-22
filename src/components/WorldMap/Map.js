@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { csv } from "d3";
+import React, { useState, useEffect } from "react";
+import { json } from "d3";
 import { scaleLinear } from "d3-scale";
 import {
   ComposableMap,
@@ -11,35 +11,37 @@ import {
 import ColorScaleWapper from '../ColorScale/ColorScale';
 
 
+
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 
-const colors = ["rgb(85,211,217)", "rgb(17,38,153)"];
-const colorsArr = [[85, 211, 217], [17, 38, 153]]
+const colors = ["#e4bad4", "#051e4a"];
+const colorsArr = [[228, 186, 212], [5, 30, 74]]
 
-const MapChart = ({ setTooltipContent, modelType }) => {
+const MapChart = ({ setContent, ToolTip, value }) => {
 
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
+  const [totalData, setTotalData] = useState([]);
+
   useEffect(() => {
-    csv(process.env.PUBLIC_URL + "/" + modelType + `.csv`).then((data) => {
-      setData(data);
+    json(process.env.PUBLIC_URL + "/stringency_long.json").then((data) => {
+      let dData = data["data"];
+      setData(dData['2021-05-19']);
+      setTotalData(dData)
     });
-  }, [modelType]);
+  }, []);
 
-  let domain = [0, 1];
-  let scale = 185;
-  if (modelType === "SIR") {
-      domain = [0, 0.5]
-  }
-  else if (modelType === "SIRF" || modelType === "SEIR") {
-      domain = [0, 0.0025]
-  }
- 
+  useEffect(() => {
+    Object.keys(totalData).length > 0 && setData(totalData[Object.keys(totalData)[value]]);
+  }, [value, totalData]);
+
+  let domain = [0, 100];
+  let scale = 200;
 
   const colorScale = scaleLinear()
-  .domain(domain)
-  .range(colors);
+    .domain(domain)
+    .range(colors);
 
   return (
     <>
@@ -49,46 +51,50 @@ const MapChart = ({ setTooltipContent, modelType }) => {
           scale: scale
         }}
       >
-      <ZoomableGroup >
-        <Graticule stroke="#E4E5E6" strokeWidth={0} />
-        {data.length > 0 && (
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const d = data.find((s) => s.id === geo.properties.NAME);
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={d ? colorScale(d["MAPE"]) : "#F5F4F6"}
-                    onMouseEnter={() => {
-                      const { NAME } = geo.properties;
-                      setTooltipContent(`${NAME}`);
-                    }}
-                    onMouseLeave={() => {
-                      setTooltipContent("");
-                    }}
-                    style={{
-                      animation: "fadeIn ease 2s",
-                      hover: {
-                        fill: "silver",
-                        outline: "none"
-                      },
-                      pressed: {
-                        fill: "#E42",
-                        outline: "none"
-                      }
-                    }}
-                  />
-                );
-              })
-            }
-          </Geographies>
-        )}
+        <ZoomableGroup >
+          <Graticule stroke="#E4E5E6" strokeWidth={0} />
+          {data !== {} && (
+            <Geographies geography={geoUrl}>
+              {({ geographies }) =>
+                geographies.map((geo) => {
+                  let d = Object.keys(data).find(country => country === geo.properties.ISO_A3);
+                  d = data[d];
+                  return (
+                    <Geography
+                      key={geo.rsmKey}
+                      geography={geo}
+                      data-tip={geo.properties.NAME}
+                      fill={d ? colorScale(d["stringency"]) : "#F5F4F6"}
+                      onMouseEnter={() => {
+                        const { NAME } = geo.properties;
+                        const STR = d ? d["stringency"] : "No data";
+                        ToolTip.rebuild();
+                        setContent(`${NAME} - ${STR.toString()}`);
+                      }}
+                      onMouseLeave={() => {
+                        setContent("");
+                      }}
+                      style={{
+                        animation: "fadeIn ease 2s",
+                        hover: {
+                          opacity: "0.5",
+                          outline: "none"
+                        },
+                        pressed: {
+                          fill: "#E42",
+                          outline: "none"
+                        }
+                      }}
+                    />
+                  );
+                })
+              }
+            </Geographies>
+          )}
         </ZoomableGroup>
       </ComposableMap>
-      <ColorScaleWapper  colors={colorsArr} domain={[0, 0.5]} />
-      </>
+      <ColorScaleWapper colors={colorsArr} domain={domain} />
+    </>
   );
 };
 

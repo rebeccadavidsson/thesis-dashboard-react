@@ -534,12 +534,10 @@ footer ul li a:hover {
   position: absolute;
   width: 95%;
   margin-left: -0.2em;
-  top: 0;
+  bottom: 1em;
 }
 .colorScale {
   overflow: hidden;
-  border-bottom-left-radius: 38%;
-  border-bottom-right-radius: 38%;
 }
 .error-label {
   font-weight: 700;
@@ -557,7 +555,7 @@ footer ul li a:hover {
 }
 .error {
   position: absolute;
-  top: 14px;
+  top: 5px;
   left: 12px;
   color: white;
   font-size: 800;
@@ -570,7 +568,7 @@ footer ul li a:hover {
   margin-bottom: 2em;
 }
 .gridLinks > div {
-  padding: 0 !important;
+  /* padding: 0 !important; */
   transition: 0.2s;
   transform: scale(1);
 }
@@ -579,10 +577,6 @@ footer ul li a:hover {
   transition: 0.2s;
   transform: scale(1.02);
 }
-
-/* .react-player__preview {
-  height: 25vw !important;
-} */
 
 .react-player-wrapper {
   width: 100%;
@@ -602,10 +596,24 @@ footer ul li a:hover {
 
 .react-player > div {
   position: relative;
-  /* width: 90% !important; */
-  /* height: 90% !important; */
 }
 
 .videoCard {
   height: 27vw;
+}
+
+.bodyDark {
+  filter: grayscale(0.4);
+}
+
+svg {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.slider_header {
+  display: grid;
+  grid-template-columns: auto auto;
 }
