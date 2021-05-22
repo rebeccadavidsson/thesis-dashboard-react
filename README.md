@@ -2,4 +2,4 @@
 
 Template by Creative Tim
 
-https://www.creative-tim.com/product/material-dashboard-react
+https://www.creative-tim.com/product/thesisproject

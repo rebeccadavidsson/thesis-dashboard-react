@@ -2,7 +2,7 @@ import {
   blackColor,
   whiteColor,
   hexToRgb
-} from "assets/jss/material-dashboard-react.js";
+} from "assets/jss/thesisproject.js";
 
 const cardStyle = {
   card: {

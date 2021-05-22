@@ -6,7 +6,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import VideoPlayer from 'components/Video/VideoPlayer';
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import styles from "assets/jss/thesisproject/views/dashboardStyle.js";
 import Footer from 'components/Footer/Footer';
 import { Link } from 'react-router-dom';
 import flowchart from "assets/img/choice_flowchart.png";

@@ -7,7 +7,7 @@ import {
   roseColor,
   grayColor,
   defaultFont
-} from "assets/jss/material-dashboard-react.js";
+} from "assets/jss/thesisproject.js";
 
 const tableStyle = theme => ({
   warningTableHeader: {

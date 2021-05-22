@@ -4,9 +4,9 @@
 * Material Dashboard React - v1.9.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Product Page: https://www.creative-tim.com/product/thesisproject
 * Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/material-dashboard-react/blob/master/LICENSE.md)
+* Licensed under MIT (https://github.com/creativetimofficial/thesisproject/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -26,7 +26,7 @@ import ScrollToTop from './components/ScrollTop/ScrollTop';
 import Admin from "layouts/Admin.js";
 
 
-import "assets/css/material-dashboard-react.css?v=1.9.0";
+import "assets/css/thesisproject.css?v=1.9.0";
 import 'assets/css/notebook1.css'
 
 const hist = createBrowserHistory();

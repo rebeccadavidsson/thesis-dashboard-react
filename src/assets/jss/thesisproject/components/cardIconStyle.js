@@ -6,7 +6,7 @@ import {
   primaryCardHeader,
   roseCardHeader,
   grayColor
-} from "assets/jss/material-dashboard-react.js";
+} from "assets/jss/thesisproject.js";
 
 const cardIconStyle = {
   cardIcon: {
