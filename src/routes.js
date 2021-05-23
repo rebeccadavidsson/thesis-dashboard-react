@@ -32,7 +32,7 @@ import BubbleChart from '@material-ui/icons/BubbleChart';
 const dashboardRoutes = [
   {
     path: "/",
-    name: "Thesis Results",
+    name: "Master Thesis Project",
     icon: Dashboard,
     component: DashboardPage,
     layout: ""

@@ -15,11 +15,13 @@ import DateSlider from '../../components/DateSlider/DateSlider';
 import ReactTooltip from "react-tooltip";
 import InfoIcon from '@material-ui/icons/Info';
 import CustomizedTooltip from '../../components/ToolTip/ToolTip';
+import ModelsGrid from '../../components/Grid/ModelsGrid';
 
 import FunctionsIcon from '@material-ui/icons/Functions';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import Timeline from '@material-ui/icons/Timeline';
 import BubbleChart from '@material-ui/icons/BubbleChart';
+
 
 
 var getDaysArray = function (start, end) {
@@ -36,6 +38,8 @@ dateRange.forEach((d) => {
   dates.push(d.toISOString().split('T')[0])
 });
 
+
+
 const useStyles = makeStyles(styles);
 
 export default function Dashboard() {
@@ -43,6 +47,23 @@ export default function Dashboard() {
   const classes = useStyles();
   const [content, setContent] = useState("");
   const [value, setValue] = useState(undefined);
+
+  const GridLink = ({ to, icon, text, color }) => {
+    return (
+      <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
+        <CardHeader color={color}>
+          <Link to={to}>
+            <div className="gridLink" >
+              {icon}
+              <h4 className={classes.cardTitleWhite}>
+                {text}
+              </h4>
+            </div>
+          </Link>
+        </CardHeader>
+      </GridItem>
+    )
+  }
 
   return (
     <div>
@@ -78,19 +99,13 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
 
+
       <GridContainer className="gridLinks">
-        <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
-          <CardHeader color="primary">
-            <Link to="algorithm_LSTM">
-              <div className="gridLink">
-                <FunctionsIcon />
-                <h4 className={classes.cardTitleWhite}>
-                  Algorithm for M1 - LSTM based model
-              </h4>
-              </div>
-            </Link>
-          </CardHeader>
-        </GridItem>
+        <GridLink
+          to={"algorithm_LSTM"}
+          icon={<FunctionsIcon />}
+          color="primary"
+          text={"Algorithm for M1 - LSTM based model"} />
         <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
           <CardHeader color="info">
             <Link onClick={() => window.location.href = "/algorithm_SIR"} >
@@ -103,33 +118,17 @@ export default function Dashboard() {
             </Link>
           </CardHeader>
         </GridItem>
-        <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
-          <CardHeader color="rose">
-            <Link to="UQ">
-              <div className="gridLink">
-                <Timeline />
-                <h4 className={classes.cardTitleWhite}>
-                  Uncertainty Quantification
-              </h4>
-              </div>
-            </Link>
-          </CardHeader>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={12} alignItems="stretch" >
-          <CardHeader color="warning">
-            <Link to="PolicyMeasures">
-              <div className="gridLink">
-                <BubbleChart />
-                <h4 className={classes.cardTitleWhite}>
-                  Analysis of policy measure strength
-              </h4>
-              </div>
-            </Link>
-          </CardHeader>
-        </GridItem>
+        <GridLink
+          to={"UQ"}
+          icon={<Timeline />}
+          color="rose"
+          text={"Uncertainty Quantification"} />
+        <GridLink
+          to={"PolicyMeasures"}
+          icon={<BubbleChart />}
+          color="warning"
+          text={"Analysis of policy measure strength"} />
       </GridContainer>
-
-
 
       <GridContainer>
 
@@ -159,7 +158,10 @@ export default function Dashboard() {
             </CardBody>
           </Card>
         </GridItem>
+      </GridContainer>
 
+      <ModelsGrid />
+      <GridContainer>
         <GridItem xs={12} sm={12} md={6} alignItems="stretch" >
           <Card>
             <CardBody>
@@ -169,24 +171,28 @@ export default function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={6} alignItems="stretch" style={{ display: 'flex' }}>
           <Card>
-            <CardHeader color="warning">
+            <CardHeader color="info" className={"b1"}>
               <h4 className={classes.cardTitleWhite}>Recommendations</h4>
             </CardHeader>
             <CardBody>
-              For policy makers, it is crucial to know exactly which model to use for what situation. There are multiple aspects here that play a role.
-              Before choosing a predictive model to predict the number of confirmed cases, the main aspects that should be considered are (1) the geographical scope, the date range of desired predictions and training data, modelling goal (predict effect of NPIs or predict the number of confirmed cases), data availability and data quality.
-              A general flowchart of choices that include these points is displayed in this Figure. First of all, the flow chart starts a choice of geographical scope.
-              SIR models are the better choice when it comes to global predictions due to the models' stability and logic regarding modelling epidemics.
-              For country-level predictions, the second choice comes to whether predictions will be made on long or short-term. For short-term predictions, ML based models would be the superior choice regarding
-              their short term prediction performance. SIR-based models can be used for long-term predictions. The most suitable SIR model variant is also country-specific
+              For policy makers, it is crucial to know exactly which model to use for what situation.
+              There are multiple aspects here that play a role. Before choosing a model to predict the number of confirmed cases,
+              the main aspects that should be considered are the geographical scope, the date range of desired
+              predictions and training data, the modelling goal, data availability and data quality.
+              A general flowchart of choices that include these points is displayed in this Figure.
+              First of all, the flow chart starts with a choice of geographical scope. SIR models are the better choice when it comes
+              to global predictions due to the models' stability and logic regarding modelling epidemics.
+              For country-level predictions, the second choice comes to whether predictions will be made
+              on long or short-term. For short-term predictions, ML based models would be the superior choice regarding
+              their short term prediction performance. SIR-based models can be used for long-term predictions.
+              The most suitable SIR model variant is country-specific
               and depends on whether there is data available of recovered and exposed cases for that country.
-              For short-term predictions, a choice is made whether the goal is to model NPI scenarios or to predict
-              the future cases without NPIs (regular predictions). To clarify, when the goal is to predict the number of cases after a lockdown,
-              the choice is made to model NPI scenarios. This modelling can be done with either hybrid model M1 or M2,
-              depending on whether the NPI has occurred before in this country and whether there is enough training data.
-              Considering that M2 is mostly based on an SIR model enhanced by an LSTM, M2 can handle sparse training data better
-              in comparison to M1. However, when training data is sufficient, M1 is able to predict future cases more accurately.
-              Lastly, when the goal is to predict future infections without including NPIs, an LSTM can be used.
+              For short-term predictions, a choice is made whether the goal is to model intervention scenarios or to predict
+              the future cases without interventions (regular predictions). This modelling can be done with either hybrid model M1 or M2,
+              depending on whether the intervention has occurred before in this country and whether there is enough training data.
+              M2 is mostly based on an SIR model and is enhanced by an LSTM. Therefore, M2 can handle sparse training data better
+              in comparison to M1. However, when training data is sufficient, M1 (an LSTM model enhanced by SIR) is able to predict future cases more accurately.
+              Lastly, when the goal is to predict future infections without including interventions, an LSTM can be used.
             </CardBody>
           </Card>
         </GridItem>
